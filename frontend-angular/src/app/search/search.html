@@ -1,0 +1,39 @@
+<section class = "search">
+
+    <h1 class="search-titulo">Encontre aqui seu próximo veículo!</h1>
+
+    <div class = "search-container">
+
+       <input class = "search-input" 
+       type = "text"
+       placeholder="Encontre o veículo dos sonhos!"
+       [(ngModel)]="termoBusca"> 
+
+   
+
+    <div class = "search-filtros">
+        <select class = "search-select" [(ngModel)] ="marcaSelecionada">
+            <option value="">Marca</option>
+            @for (marca of marcas; track marca){
+                <option value = "marca">{{ marca }}</option>
+            }
+        </select>
+
+         <select class = "search-select" [(ngModel)] ="anoSelecionado">
+            <option value="">Ano</option>
+            @for (ano of anos; track ano){
+                <option value = "marca">{{ano}}</option>
+            }
+        </select>
+
+        <select class = "search-select" [(ngModel)] ="precoSelecionado">
+            <option value="">Preço</option>
+            @for (preco of precos; track preco){
+                <option value = "marca">{{preco}}</option>
+            }
+        </select>
+
+        <button class = "search-button">Buscar</button>
+        </div>
+    </div>
+</section>
