@@ -1,39 +1,71 @@
-<section class = "search">
+<section class="search">
 
-    <h1 class="search-titulo">Encontre aqui seu próximo veículo!</h1>
+  <h1 class="search-titulo">Encontre aqui seu próximo veículo!</h1>
 
-    <div class = "search-container">
+  <div class="search-container">
+    <input
+      class="search-input"
+      type="text"
+      placeholder="🔍  Buscar veículo..."
+      [(ngModel)]="termoBusca"
+    />
 
-       <input class = "search-input" 
-       type = "text"
-       placeholder="Encontre o veículo dos sonhos!"
-       [(ngModel)]="termoBusca"> 
+    <div class="search-filtros">
 
-   
-
-    <div class = "search-filtros">
-        <select class = "search-select" [(ngModel)] ="marcaSelecionada">
-            <option value="">Marca</option>
-            @for (marca of marcas; track marca){
-                <option value = "marca">{{ marca }}</option>
+      <!-- Marca -->
+      <div class="dropdown">
+        <button class="dropdown__btn" (click)="toggleDropdown('marca')">
+          {{ marcaSelecionada || 'Marca' }}
+          <span class="dropdown__seta">▾</span>
+        </button>
+        @if (dropdownAberto === 'marca') {
+          <div class="dropdown__menu">
+            @for (marca of marcas; track marca) {
+              <div class="dropdown__item" (click)="selecionar('marca', marca)">
+                {{ marca }}
+              </div>
             }
-        </select>
+          </div>
+        }
+      </div>
 
-         <select class = "search-select" [(ngModel)] ="anoSelecionado">
-            <option value="">Ano</option>
-            @for (ano of anos; track ano){
-                <option value = "marca">{{ano}}</option>
+      <!-- Ano -->
+      <div class="dropdown">
+        <button class="dropdown__btn" (click)="toggleDropdown('ano')">
+          {{ anoSelecionado || 'Ano' }}
+          <span class="dropdown__seta">▾</span>
+        </button>
+        @if (dropdownAberto === 'ano') {
+          <div class="dropdown__menu">
+            @for (ano of anos; track ano) {
+              <div class="dropdown__item" (click)="selecionar('ano', ano)">
+                {{ ano }}
+              </div>
             }
-        </select>
+          </div>
+        }
+      </div>
 
-        <select class = "search-select" [(ngModel)] ="precoSelecionado">
-            <option value="">Preço</option>
-            @for (preco of precos; track preco){
-                <option value = "marca">{{preco}}</option>
+      <!-- Preço -->
+      <div class="dropdown">
+        <button class="dropdown__btn" (click)="toggleDropdown('preco')">
+          {{ precoSelecionado || 'Preço' }}
+          <span class="dropdown__seta">▾</span>
+        </button>
+        @if (dropdownAberto === 'preco') {
+          <div class="dropdown__menu">
+            @for (preco of precos; track preco) {
+              <div class="dropdown__item" (click)="selecionar('preco', preco)">
+                {{ preco }}
+              </div>
             }
-        </select>
+          </div>
+        }
+      </div>
 
-        <button class = "search-button">Buscar</button>
-        </div>
+      <button class="search__btn">Buscar</button>
+
     </div>
+  </div>
+
 </section>
