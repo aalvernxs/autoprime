@@ -1,0 +1,8 @@
+<section class="car-list">
+  <h2 class="car-list__titulo">Veículos disponíveis</h2>
+  <div class="car-list__grid">
+    @for (car of cars; track car.id) {
+      <app-car-card [car]="car" />
+    }
+  </div>
+</section>
