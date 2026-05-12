@@ -1,10 +1,10 @@
-<mat-card class="card">
+<div class="card">
   <div class="card__img-wrapper">
     <img [src]="car.foto" [alt]="car.modelo" class="card__img">
     <span class="card__badge">{{ car.ano }}</span>
   </div>
 
-  <mat-card-content class="card__content">
+  <div class="card__content">
     <h3 class="card__nome">{{ car.marca }} {{ car.modelo }}</h3>
 
     <div class="card__info">
@@ -16,5 +16,7 @@
       <span class="card__preco">{{ car.preco | currency:'BRL':'symbol':'1.0-0' }}</span>
       <span class="card__combustivel">{{ car.combustivel }}</span>
     </div>
-  </mat-card-content>
-</mat-card>
+
+    <button class="card__btn" (click)="verDetalhes()">Ver detalhes</button>
+  </div>
+</div>

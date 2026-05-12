@@ -1,1 +1,51 @@
-<p>car-detail works!</p>
+<div class="detail" *ngIf="car; else notFound">
+
+  <div class="detail__header">
+    <button class="detail__voltar" (click)="voltar()">← Voltar</button>
+    <h1 class="detail__titulo">{{ car.marca }} {{ car.modelo }}</h1>
+  </div>
+
+  <div class="detail__container">
+    <div class="detail__img-wrapper">
+      <img [src]="car.foto" [alt]="car.modelo" class="detail__img">
+      <span class="detail__badge">{{ car.ano }}</span>
+    </div>
+
+    <div class="detail__info">
+      <div class="detail__preco">{{ car.preco | currency:'BRL':'symbol':'1.0-0' }}</div>
+
+      <div class="detail__specs">
+        <div class="detail__spec">
+          <span class="detail__spec-label">Marca</span>
+          <span class="detail__spec-value">{{ car.marca }}</span>
+        </div>
+        <div class="detail__spec">
+          <span class="detail__spec-label">Modelo</span>
+          <span class="detail__spec-value">{{ car.modelo }}</span>
+        </div>
+        <div class="detail__spec">
+          <span class="detail__spec-label">Ano</span>
+          <span class="detail__spec-value">{{ car.ano }}</span>
+        </div>
+        <div class="detail__spec">
+          <span class="detail__spec-label">Quilometragem</span>
+          <span class="detail__spec-value">{{ car.km | number:'1.0-0' }} km</span>
+        </div>
+        <div class="detail__spec">
+          <span class="detail__spec-label">Combustível</span>
+          <span class="detail__spec-value">{{ car.combustivel }}</span>
+        </div>
+      </div>
+
+      <button class="detail__btn" (click)="voltar()">← Voltar para listagem</button>
+    </div>
+  </div>
+
+</div>
+
+<ng-template #notFound>
+  <div class="detail__not-found">
+    <h2>Veículo não encontrado!</h2>
+    <button class="detail__btn" (click)="voltar()">← Voltar</button>
+  </div>
+</ng-template>
