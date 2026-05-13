@@ -14,6 +14,10 @@ export const routes: Routes = [
     loadComponent: () => import('./pages/login/login').then(m => m.Login)
   },
   {
+    path: 'admin/cadastro',
+    loadComponent: () => import('./pages/admin/car-form/car-form').then(m => m.CarFormComponent)
+  },
+  {
     path: '**',
     redirectTo: ''
   }
