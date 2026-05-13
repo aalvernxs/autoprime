@@ -1,0 +1,121 @@
+.admin {
+  min-height: 100vh;
+  background-color: #f5f5f5;
+  padding: 2rem;
+}
+
+.admin__container {
+  max-width: 1100px;
+  margin: 0 auto;
+}
+
+.admin__header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 2rem;
+}
+
+.admin__titulo {
+  font-size: 1.8rem;
+  font-weight: 700;
+  color: var(--primary);
+}
+
+.admin__subtitulo {
+  color: #666;
+  margin-top: 0.3rem;
+}
+
+.admin__btn-voltar {
+  padding: 0.6rem 1.5rem;
+  background: none;
+  border: 2px solid var(--primary);
+  color: var(--primary);
+  font-weight: 600;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.admin__btn-voltar:hover {
+  background-color: var(--primary);
+  color: #ffffff;
+}
+
+.admin__cards {
+  display: flex;
+  gap: 1.5rem;
+  margin-bottom: 2.5rem;
+}
+
+.admin__card {
+  background: #ffffff;
+  border-radius: 12px;
+  padding: 1.5rem;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.06);
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  min-width: 200px;
+}
+
+.admin__card-icon {
+  font-size: 2rem;
+}
+
+.admin__card-label {
+  font-size: 0.85rem;
+  color: #666;
+}
+
+.admin__card-valor {
+  font-size: 1.8rem;
+  font-weight: 700;
+  color: var(--primary);
+}
+
+.admin__acoes-titulo {
+  font-size: 1.2rem;
+  font-weight: 700;
+  color: var(--primary);
+  margin-bottom: 1rem;
+}
+
+.admin__acoes-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: 1.5rem;
+}
+
+.admin__acao {
+  background: #ffffff;
+  border-radius: 12px;
+  padding: 1.5rem;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.06);
+  cursor: pointer;
+  transition: transform 0.2s, box-shadow 0.2s;
+  border-left: 4px solid var(--accent);
+}
+
+.admin__acao:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
+}
+
+.admin__acao-icon {
+  font-size: 1.8rem;
+}
+
+.admin__acao-titulo {
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--primary);
+  margin-top: 0.75rem;
+}
+
+.admin__acao-desc {
+  font-size: 0.85rem;
+  color: #666;
+  margin-top: 0.3rem;
+}

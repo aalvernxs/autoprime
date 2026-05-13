@@ -1,1 +1,36 @@
-<p>admin-panel works!</p>
+<div class="admin">
+  <div class="admin__container">
+
+    <div class="admin__header">
+      <div>
+        <h1 class="admin__titulo">Painel Administrativo</h1>
+        <p class="admin__subtitulo">Gerencie os veículos do AutoPrime</p>
+      </div>
+      <button class="admin__btn-voltar" (click)="irParaHome()">← Voltar ao site</button>
+    </div>
+
+    <div class="admin__cards">
+      <div class="admin__card">
+        <span class="admin__card-icon">🚗</span>
+        <div>
+          <p class="admin__card-label">Total de veículos</p>
+          <p class="admin__card-valor">{{ totalCarros }}</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="admin__acoes">
+      <h2 class="admin__acoes-titulo">Ações</h2>
+      <div class="admin__acoes-grid">
+
+        <div class="admin__acao" (click)="irParaCadastro()">
+          <span class="admin__acao-icon">➕</span>
+          <h3 class="admin__acao-titulo">Cadastrar veículo</h3>
+          <p class="admin__acao-desc">Adicione um novo veículo ao catálogo</p>
+        </div>
+
+      </div>
+    </div>
+
+  </div>
+</div>

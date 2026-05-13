@@ -23,7 +23,7 @@ export class Login {
 
   login(){
     if (this.email === 'admin' && this.senha === 'admin') {
-      this.router.navigate(['/']);
+      this.router.navigate(['/admin']);
     } else {
       alert('Credenciais inválidas. Tente novamente.');
     }

@@ -13,6 +13,10 @@ export const routes: Routes = [
     path: 'login',
     loadComponent: () => import('./pages/login/login').then(m => m.Login)
   },
+   {
+    path: 'admin',
+    loadComponent: () => import('./pages/admin/admin-panel/admin-panel').then(m => m.AdminPanelComponent)
+  },
   {
     path: 'admin/cadastro',
     loadComponent: () => import('./pages/admin/car-form/car-form').then(m => m.CarFormComponent)
