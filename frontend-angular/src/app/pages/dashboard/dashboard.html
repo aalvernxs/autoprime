@@ -1,0 +1,139 @@
+<div class="dashboard">
+  <div class="dashboard__container">
+
+    <div class="dashboard__header">
+      <div>
+        <h1 class="dashboard__titulo">Dashboard</h1>
+        <p class="dashboard__subtitulo">Relatórios e estatísticas do AutoPrime</p>
+      </div>
+      <button mat-stroked-button color="primary" (click)="voltar()">
+        <mat-icon>arrow_back</mat-icon>
+        Voltar ao painel
+      </button>
+    </div>
+
+    <!-- Cards de resumo -->
+    <div class="dashboard__resumo">
+
+      <mat-card class="dashboard__card">
+        <mat-card-content>
+          <div class="dashboard__card-content">
+            <mat-icon class="dashboard__card-icon">directions_car</mat-icon>
+            <div>
+              <p class="dashboard__card-label">Total de veículos</p>
+              <p class="dashboard__card-valor">{{ totalCarros }}</p>
+            </div>
+          </div>
+        </mat-card-content>
+      </mat-card>
+
+      <mat-card class="dashboard__card">
+        <mat-card-content>
+          <div class="dashboard__card-content">
+            <mat-icon class="dashboard__card-icon">attach_money</mat-icon>
+            <div>
+              <p class="dashboard__card-label">Média de preços</p>
+              <p class="dashboard__card-valor">{{ mediaPreco | currency:'BRL':'symbol':'1.0-0' }}</p>
+            </div>
+          </div>
+        </mat-card-content>
+      </mat-card>
+
+      <mat-card class="dashboard__card">
+        <mat-card-content>
+          <div class="dashboard__card-content">
+            <mat-icon class="dashboard__card-icon">trending_up</mat-icon>
+            <div>
+              <p class="dashboard__card-label">Mais caro</p>
+              <p class="dashboard__card-valor">{{ carroMaisCaro?.preco | currency:'BRL':'symbol':'1.0-0' }}</p>
+              <p class="dashboard__card-sub">{{ carroMaisCaro?.marca }} {{ carroMaisCaro?.modelo }}</p>
+            </div>
+          </div>
+        </mat-card-content>
+      </mat-card>
+
+      <mat-card class="dashboard__card">
+        <mat-card-content>
+          <div class="dashboard__card-content">
+            <mat-icon class="dashboard__card-icon">trending_down</mat-icon>
+            <div>
+              <p class="dashboard__card-label">Mais barato</p>
+              <p class="dashboard__card-valor">{{ carroMaisBarato?.preco | currency:'BRL':'symbol':'1.0-0' }}</p>
+              <p class="dashboard__card-sub">{{ carroMaisBarato?.marca }} {{ carroMaisBarato?.modelo }}</p>
+            </div>
+          </div>
+        </mat-card-content>
+      </mat-card>
+
+    </div>
+
+    <!-- Tabelas -->
+    <div class="dashboard__tabelas">
+
+      <!-- Por marca -->
+      <mat-card class="dashboard__tabela-card">
+        <mat-card-header>
+          <mat-card-title>Veículos por marca</mat-card-title>
+        </mat-card-header>
+        <mat-card-content>
+          <table mat-table [dataSource]="porMarca" class="dashboard__tabela">
+            <ng-container matColumnDef="marca">
+              <th mat-header-cell *matHeaderCellDef>Marca</th>
+              <td mat-cell *matCellDef="let item">{{ item.marca }}</td>
+            </ng-container>
+            <ng-container matColumnDef="quantidade">
+              <th mat-header-cell *matHeaderCellDef>Quantidade</th>
+              <td mat-cell *matCellDef="let item">{{ item.quantidade }}</td>
+            </ng-container>
+            <tr mat-header-row *matHeaderRowDef="colunasMarca"></tr>
+            <tr mat-row *matRowDef="let row; columns: colunasMarca;"></tr>
+          </table>
+        </mat-card-content>
+      </mat-card>
+
+      <!-- Por ano -->
+      <mat-card class="dashboard__tabela-card">
+        <mat-card-header>
+          <mat-card-title>Veículos por ano</mat-card-title>
+        </mat-card-header>
+        <mat-card-content>
+          <table mat-table [dataSource]="porAno" class="dashboard__tabela">
+            <ng-container matColumnDef="ano">
+              <th mat-header-cell *matHeaderCellDef>Ano</th>
+              <td mat-cell *matCellDef="let item">{{ item.ano }}</td>
+            </ng-container>
+            <ng-container matColumnDef="quantidade">
+              <th mat-header-cell *matHeaderCellDef>Quantidade</th>
+              <td mat-cell *matCellDef="let item">{{ item.quantidade }}</td>
+            </ng-container>
+            <tr mat-header-row *matHeaderRowDef="colunasAno"></tr>
+            <tr mat-row *matRowDef="let row; columns: colunasAno;"></tr>
+          </table>
+        </mat-card-content>
+      </mat-card>
+
+      <!-- Por combustível -->
+      <mat-card class="dashboard__tabela-card">
+        <mat-card-header>
+          <mat-card-title>Veículos por combustível</mat-card-title>
+        </mat-card-header>
+        <mat-card-content>
+          <table mat-table [dataSource]="porCombustivel" class="dashboard__tabela">
+            <ng-container matColumnDef="combustivel">
+              <th mat-header-cell *matHeaderCellDef>Combustível</th>
+              <td mat-cell *matCellDef="let item">{{ item.combustivel }}</td>
+            </ng-container>
+            <ng-container matColumnDef="quantidade">
+              <th mat-header-cell *matHeaderCellDef>Quantidade</th>
+              <td mat-cell *matCellDef="let item">{{ item.quantidade }}</td>
+            </ng-container>
+            <tr mat-header-row *matHeaderRowDef="colunasCombustivel"></tr>
+            <tr mat-row *matRowDef="let row; columns: colunasCombustivel;"></tr>
+          </table>
+        </mat-card-content>
+      </mat-card>
+
+    </div>
+
+  </div>
+</div>

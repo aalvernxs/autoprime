@@ -35,6 +35,10 @@ export class AdminPanelComponent {
     this.router.navigate(['/']);
   }
 
+  irParaDashboard() {
+  this.router.navigate(['/admin/dashboard']);
+}
+
   editar(id: number) {
     this.router.navigate(['/admin/editar', id]);
   }

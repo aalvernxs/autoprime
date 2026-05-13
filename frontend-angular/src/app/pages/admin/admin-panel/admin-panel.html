@@ -9,15 +9,23 @@
       <button class="admin__btn-voltar" (click)="irParaHome()">← Voltar ao site</button>
     </div>
 
-    <div class="admin__cards">
-      <div class="admin__card">
-        <span class="admin__card-icon">🚗</span>
-        <div>
-          <p class="admin__card-label">Total de veículos</p>
-          <p class="admin__card-valor">{{ totalCarros }}</p>
-        </div>
-      </div>
+   <div class="admin__cards">
+  <div class="admin__card">
+    <span class="admin__card-icon">🚗</span>
+    <div>
+      <p class="admin__card-label">Total de veículos</p>
+      <p class="admin__card-valor">{{ totalCarros }}</p>
     </div>
+  </div>
+
+  <div class="admin__card admin__card--clicavel" (click)="irParaDashboard()">
+    <span class="admin__card-icon">📊</span>
+    <div>
+      <p class="admin__card-label">Dashboard</p>
+      <p class="admin__card-valor">Relatórios</p>
+    </div>
+  </div>
+</div>
 
     <div class="admin__acoes">
       <div class="admin__acoes-header">
@@ -25,6 +33,7 @@
         <button class="btn-cadastrar" (click)="irParaCadastro()">➕ Cadastrar veículo</button>
       </div>
 
+     
       <table mat-table [dataSource]="cars" class="admin__tabela">
 
         <ng-container matColumnDef="marca">

@@ -143,3 +143,14 @@
   margin-right: 0.5rem;
   transition: background-color 0.2s;
 }
+
+.admin__card--clicavel {
+  cursor: pointer;
+  transition: transform 0.2s, box-shadow 0.2s;
+  border-left: 4px solid var(--accent);
+}
+
+.admin__card--clicavel:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
+}

@@ -1,0 +1,85 @@
+.dashboard {
+  min-height: 100vh;
+  background-color: #f5f5f5;
+  padding: 2rem;
+}
+
+.dashboard__container {
+  max-width: 1100px;
+  margin: 0 auto;
+}
+
+.dashboard__header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 2rem;
+}
+
+.dashboard__titulo {
+  font-size: 1.8rem;
+  font-weight: 700;
+  color: var(--primary);
+}
+
+.dashboard__subtitulo {
+  color: #666;
+  margin-top: 0.3rem;
+}
+
+.dashboard__resumo {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+  gap: 1.5rem;
+  margin-bottom: 2rem;
+}
+
+.dashboard__card {
+  border-radius: 12px !important;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.06) !important;
+}
+
+.dashboard__card-content {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 0.5rem 0;
+}
+
+.dashboard__card-icon {
+  font-size: 2.5rem !important;
+  width: 2.5rem !important;
+  height: 2.5rem !important;
+  color: var(--accent);
+}
+
+.dashboard__card-label {
+  font-size: 0.85rem;
+  color: #666;
+}
+
+.dashboard__card-valor {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: var(--primary);
+}
+
+.dashboard__card-sub {
+  font-size: 0.8rem;
+  color: #888;
+}
+
+.dashboard__tabelas {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 1.5rem;
+}
+
+.dashboard__tabela-card {
+  border-radius: 12px !important;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.06) !important;
+}
+
+.dashboard__tabela {
+  width: 100%;
+}

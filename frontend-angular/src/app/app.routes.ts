@@ -22,6 +22,14 @@ export const routes: Routes = [
     loadComponent: () => import('./pages/admin/car-form/car-form').then(m => m.CarFormComponent)
   },
   {
+    path: 'admin/editar/:id',
+    loadComponent: () => import('./pages/admin/car-list/car-list').then(m => m.CarEditComponent)
+  },
+   {
+    path: 'admin/dashboard',
+    loadComponent: () => import('./pages/dashboard/dashboard').then(m => m.DashboardComponent)
+  },
+  {
     path: '**',
     redirectTo: ''
   }

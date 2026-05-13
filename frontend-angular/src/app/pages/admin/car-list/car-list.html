@@ -1,0 +1,85 @@
+<div class="form-page">
+  <div class="form-container">
+
+    <div class="form-header">
+      <h1 class="form-titulo">Editar Veículo</h1>
+      <p class="form-subtitulo">Atualize as informações do veículo</p>
+    </div>
+
+    <div class="form-grid">
+
+      <mat-form-field appearance="outline" class="form-field">
+        <mat-label>Marca *</mat-label>
+        <input matInput [(ngModel)]="car.marca" placeholder="Ex: Honda">
+        <mat-icon matSuffix>directions_car</mat-icon>
+      </mat-form-field>
+
+      <mat-form-field appearance="outline" class="form-field">
+        <mat-label>Modelo *</mat-label>
+        <input matInput [(ngModel)]="car.modelo" placeholder="Ex: Civic EXL 2.0">
+      </mat-form-field>
+
+      <mat-form-field appearance="outline" class="form-field">
+        <mat-label>Ano *</mat-label>
+        <input matInput type="number" [(ngModel)]="car.ano" placeholder="Ex: 2023">
+      </mat-form-field>
+
+      <mat-form-field appearance="outline" class="form-field">
+        <mat-label>Preço *</mat-label>
+        <input matInput type="number" [(ngModel)]="car.preco" placeholder="Ex: 145000">
+        <span matTextPrefix>R$&nbsp;</span>
+      </mat-form-field>
+
+      <mat-form-field appearance="outline" class="form-field">
+        <mat-label>Quilometragem</mat-label>
+        <input matInput type="number" [(ngModel)]="car.km" placeholder="Ex: 15000">
+        <span matTextSuffix>&nbsp;km</span>
+      </mat-form-field>
+
+      <mat-form-field appearance="outline" class="form-field">
+        <mat-label>Combustível</mat-label>
+        <mat-select [(ngModel)]="car.combustivel">
+          @for (c of combustiveis; track c) {
+            <mat-option [value]="c">{{ c }}</mat-option>
+          }
+        </mat-select>
+      </mat-form-field>
+
+    </div>
+
+    <mat-form-field appearance="outline" class="form-field form-field--full">
+      <mat-label>Descrição</mat-label>
+      <textarea matInput [(ngModel)]="car.descricao" rows="4" placeholder="Descreva o veículo..."></textarea>
+    </mat-form-field>
+
+    <div class="form-fotos">
+      <h3 class="form-fotos__titulo">Fotos do veículo</h3>
+
+      <div class="form-fotos__input">
+        <mat-form-field appearance="outline" class="form-field form-field--full">
+          <mat-label>URL da foto</mat-label>
+          <input matInput [(ngModel)]="fotoUrl" placeholder="https://...">
+          <mat-icon matSuffix>image</mat-icon>
+        </mat-form-field>
+        <button class="btn-adicionar" (click)="adicionarFoto()">Adicionar</button>
+      </div>
+
+      @if (car.fotos && car.fotos.length > 0) {
+        <div class="form-fotos__lista">
+          @for (foto of car.fotos; track $index) {
+            <div class="form-fotos__item">
+              <img [src]="foto" alt="Foto do veículo" class="form-fotos__preview">
+              <button class="form-fotos__remover" (click)="removerFoto($index)">✕</button>
+            </div>
+          }
+        </div>
+      }
+    </div>
+
+    <div class="form-acoes">
+      <button class="btn-cancelar" (click)="cancelar()">Cancelar</button>
+      <button class="btn-salvar" (click)="salvar()">Salvar alterações</button>
+    </div>
+
+  </div>
+</div>
