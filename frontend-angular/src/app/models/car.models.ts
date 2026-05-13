@@ -6,5 +6,7 @@ export interface Car{
     preco: number;
     km: number;
     combustivel: string;
-    foto: string;
+    fotos: string[];
+    descricao: string;
+  
 }

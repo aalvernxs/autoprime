@@ -1,11 +1,20 @@
 import { Routes } from '@angular/router';
-import { HomeComponent} from './pages/home/home';
-import { CarDetailComponent } from './pages/car-detail/car-detail';
-import { Login} from './pages/login/login';
 
 export const routes: Routes = [
-  { path: '', component: HomeComponent },
-  { path: 'carro/:id', component: CarDetailComponent},
-  { path: 'login', component: Login },
-  { path: '**', redirectTo: '' }
+  {
+    path: '',
+    loadComponent: () => import('./pages/home/home').then(m => m.HomeComponent)
+  },
+  {
+    path: 'carro/:id',
+    loadComponent: () => import('./pages/car-detail/car-detail').then(m => m.CarDetailComponent)
+  },
+  {
+    path: 'login',
+    loadComponent: () => import('./pages/login/login').then(m => m.Login)
+  },
+  {
+    path: '**',
+    redirectTo: ''
+  }
 ];

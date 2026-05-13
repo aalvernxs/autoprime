@@ -1,1 +1,28 @@
-<p>login works!</p>
+<div class="login">
+  <div class="login__container">
+
+    <div class="login__header">
+      <h1 class="login__logo">Auto <span>Prime</span></h1>
+      <p class="login__subtitulo">Acesse sua conta</p>
+    </div>
+
+    <div class="login__form">
+      <mat-form-field appearance="outline" class="login__field">
+        <mat-label>Email</mat-label>
+        <input matInput type="email" [(ngModel)]="email" placeholder="seu@email.com">
+        <mat-icon matSuffix>email</mat-icon>
+      </mat-form-field>
+
+      <mat-form-field appearance="outline" class="login__field">
+        <mat-label>Senha</mat-label>
+        <input matInput [type]="senhaVisivel ? 'text' : 'password'" [(ngModel)]="senha">
+        <mat-icon matSuffix (click)="toggleSenhaVisivel()" style="cursor:pointer">
+          {{ senhaVisivel ? 'visibility_off' : 'visibility' }}
+        </mat-icon>
+      </mat-form-field>
+
+      <button class="login__btn" (click)="login()">Entrar</button>
+    </div>
+
+  </div>
+</div>

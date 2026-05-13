@@ -1,0 +1,103 @@
+.login {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-image: url('https://images.unsplash.com/photo-1469854523086-cc02fe5d8800?w=1600');
+  background-size: cover;
+  background-position: center;
+  position: relative;
+}
+
+.login::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.6);
+}
+
+.login__container {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  max-width: 420px;
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 16px;
+  padding: 2.5rem;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+}
+
+.login__header {
+  text-align: center;
+  margin-bottom: 2rem;
+}
+
+.login__logo {
+  font-size: 2rem;
+  font-weight: 700;
+  color: #ffffff;
+  letter-spacing: 1px;
+}
+
+.login__logo span {
+  color: var(--accent);
+}
+
+.login__subtitulo {
+  color: rgba(255, 255, 255, 0.7);
+  margin-top: 0.5rem;
+  font-size: 0.95rem;
+}
+
+.login__form {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.login__field {
+  width: 100%;
+}
+
+.login__field .mat-mdc-form-field-flex {
+  background: rgba(255, 255, 255, 0.15) !important;
+}
+
+.login__field input {
+  color: #ffffff !important;
+}
+
+.login__field .mat-mdc-floating-label {
+  color: rgba(255, 255, 255, 0.7) !important;
+}
+
+.login__field .mdc-notched-outline__leading,
+.login__field .mdc-notched-outline__notch,
+.login__field .mdc-notched-outline__trailing {
+  border-color: rgba(255, 255, 255, 0.3) !important;
+}
+
+.login__field mat-icon {
+  color: rgba(255, 255, 255, 0.7);
+}
+
+.login__btn {
+  width: 100%;
+  padding: 0.85rem;
+  background-color: var(--accent);
+  color: #ffffff;
+  font-size: 1rem;
+  font-weight: 600;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.2s;
+  margin-top: 0.5rem;
+}
+
+.login__btn:hover {
+  background-color: #e55a28;
+}

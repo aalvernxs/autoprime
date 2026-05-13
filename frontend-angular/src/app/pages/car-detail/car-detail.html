@@ -7,8 +7,17 @@
 
   <div class="detail__container">
     <div class="detail__img-wrapper">
-      <img [src]="car.foto" [alt]="car.modelo" class="detail__img">
+      <img [src]="car.fotos[fotoAtual]" [alt]="car.modelo" class="detail__img">
       <span class="detail__badge">{{ car.ano }}</span>
+
+      <button class="detail__seta detail__seta--esq" (click)="fotoAnterior()">&#8249;</button>
+      <button class="detail__seta detail__seta--dir" (click)="proximaFoto()">&#8250;</button>
+
+      <div class="detail__indicadores">
+        @for (foto of car.fotos; track $index) {
+          <span class="detail__indicador" [class.ativo]="$index === fotoAtual"></span>
+        }
+      </div>
     </div>
 
     <div class="detail__info">
@@ -39,6 +48,11 @@
 
       <button class="detail__btn" (click)="voltar()">← Voltar para listagem</button>
     </div>
+  </div>
+
+  <div class="detail__descricao">
+    <h2 class="detail__descricao-titulo">Sobre o veículo</h2>
+    <p class="detail__descricao-texto">{{ car.descricao }}</p>
   </div>
 
 </div>
