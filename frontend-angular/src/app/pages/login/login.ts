@@ -6,6 +6,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { Router } from '@angular/router';
+import { AuthService } from '../../services/auth';
 
   
 @Component({
@@ -19,13 +20,17 @@ export class Login {
   senha = '';
   senhaVisivel = false;
 
-  constructor(private router: Router) {}
 
-  login(){
-    if (this.email === 'admin' && this.senha === 'admin') {
+  constructor(
+    private authService: AuthService,
+    private router: Router
+  ) {}
+
+  login() {
+    if (this.authService.login(this.email, this.senha)) {
       this.router.navigate(['/admin']);
     } else {
-      alert('Credenciais inválidas. Tente novamente.');
+      alert('Email ou senha incorretos!');
     }
   }
   
