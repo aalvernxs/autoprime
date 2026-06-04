@@ -59,8 +59,7 @@ export class CarFormComponent {
 
   salvar() {
     if (this.car.marca && this.car.modelo && this.car.ano && this.car.preco) {
-      this.Car.add(this.car as Car);
-      this.router.navigate(['/']);
+      this.Car.create(this.car).subscribe(() => this.router.navigate(['/']));
     } else {
       alert('Preencha todos os campos obrigatórios!');
     }

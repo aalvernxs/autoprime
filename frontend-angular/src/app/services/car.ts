@@ -1,10 +1,17 @@
 import { Injectable } from '@angular/core';
 import { Car } from '../models/car.models';
+import { HttpClient } from '@angular/common/http';
+import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
 export class CarService {
+
+  private baseUrl = 'http://localhost:3000';
+
+  constructor(private http: HttpClient) {}
+
 
 private cars: Car[] = [
   {
@@ -65,6 +72,27 @@ private cars: Car[] = [
 
   getAll(): Car[] {
     return this.cars;
+  }
+
+  // Novo método: retorna Observable consumindo o backend
+  fetchAll(): Observable<Car[]> {
+    return this.http.get<Car[]>(`${this.baseUrl}/cars`);
+  }
+
+  fetchById(id: number): Observable<Car> {
+    return this.http.get<Car>(`${this.baseUrl}/cars/${id}`);
+  }
+
+  create(car: Partial<Car>): Observable<Car> {
+    return this.http.post<Car>(`${this.baseUrl}/cars`, car);
+  }
+
+  updateRemote(car: Car): Observable<Car> {
+    return this.http.put<Car>(`${this.baseUrl}/cars/${car.id}`, car);
+  }
+
+  deleteRemote(id: number): Observable<void> {
+    return this.http.delete<void>(`${this.baseUrl}/cars/${id}`);
   }
 
   getById(id: number): Car | undefined {

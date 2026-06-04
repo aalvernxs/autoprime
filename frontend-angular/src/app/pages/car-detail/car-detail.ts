@@ -25,7 +25,7 @@ export class CarDetailComponent implements OnInit {
 
   ngOnInit(): void {
     const id = Number(this.route.snapshot.paramMap.get('id'));
-    this.car = this.carService.getById(id);
+    this.carService.fetchById(id).subscribe(car => this.car = car);
   }
 
    proximaFoto(): void {

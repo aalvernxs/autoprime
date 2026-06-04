@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Router } from '@angular/router';
 import { MatButtonModule } from '@angular/material/button';
@@ -22,9 +22,17 @@ export class AdminPanelComponent {
   constructor(
     private carService: CarService,
     private router: Router
-  ) {
-    this.cars = this.carService.getAll();
-    this.totalCarros = this.cars.length;
+  ) {}
+
+  ngOnInit(): void {
+    this.load();
+  }
+
+  private load() {
+    this.carService.fetchAll().subscribe(cars => {
+      this.cars = cars;
+      this.totalCarros = cars.length;
+    });
   }
 
   irParaCadastro() {
@@ -45,9 +53,7 @@ export class AdminPanelComponent {
 
   excluir(id: number) {
     if (confirm('Tem certeza que deseja excluir este veículo?')) {
-      this.carService.delete(id);
-      this.cars = this.carService.getAll();
-      this.totalCarros = this.cars.length;
+      this.carService.deleteRemote(id).subscribe(() => this.load());
     }
   }
 }

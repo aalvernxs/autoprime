@@ -2,7 +2,30 @@
   <h2 class="car-list__titulo">Veículos disponíveis</h2>
   <div class="car-list__grid">
     @for (car of cars; track car.id) {
-      <app-car-card [car]="car" />
+      <article class="card">
+        <div class="card__img-wrapper">
+          <img [src]="car.fotos[0] || placeholderImage" [alt]="car.modelo" class="card__img">
+          <span class="card__badge">{{ car.ano }}</span>
+        </div>
+
+        <div class="card__content">
+          <h3 class="card__nome">{{ car.marca }} {{ car.modelo }}</h3>
+
+          <div class="card__info">
+            <span class="card__info-item">🗓 {{ car.ano }}</span>
+            <span class="card__info-item">⏱ {{ car.km | number:'1.0-0' }} km</span>
+          </div>
+
+          <div class="card__rodape">
+            <span class="card__preco">{{ car.preco | currency:'BRL':'symbol':'1.0-0' }}</span>
+            <span class="card__combustivel">{{ car.combustivel }}</span>
+          </div>
+
+          <button class="card__btn" (click)="verDetalhes(car.id)">Ver detalhes</button>
+        </div>
+      </article>
+    } @empty {
+      <p class="car-list__vazio">Nenhum veículo cadastrado ainda.</p>
     }
   </div>
 </section>

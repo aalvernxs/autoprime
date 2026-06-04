@@ -44,15 +44,21 @@ export class DashboardComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.cars = this.carService.getAll();
-    this.totalCarros = this.cars.length;
-    this.mediaPreco = this.cars.reduce((acc, c) => acc + c.preco, 0) / this.totalCarros;
-    this.carroMaisCaro = this.cars.reduce((a, b) => a.preco > b.preco ? a : b);
-    this.carroMaisBarato = this.cars.reduce((a, b) => a.preco < b.preco ? a : b);
+    this.carService.fetchAll().subscribe(cars => {
+      this.cars = cars;
+      this.totalCarros = this.cars.length;
+      if (this.totalCarros > 0) {
+        this.mediaPreco = this.cars.reduce((acc, c) => acc + c.preco, 0) / this.totalCarros;
+        this.carroMaisCaro = this.cars.reduce((a, b) => a.preco > b.preco ? a : b);
+        this.carroMaisBarato = this.cars.reduce((a, b) => a.preco < b.preco ? a : b);
+      } else {
+        this.mediaPreco = 0;
+      }
 
-    this.porMarca = this.agrupar('marca');
-    this.porAno = this.agrupar('ano').sort((a: any, b: any) => b.ano - a.ano);
-    this.porCombustivel = this.agrupar('combustivel');
+      this.porMarca = this.agrupar('marca');
+      this.porAno = this.agrupar('ano').sort((a: any, b: any) => b.ano - a.ano);
+      this.porCombustivel = this.agrupar('combustivel');
+    });
   }
 
   agrupar(campo: keyof Car): any[] {

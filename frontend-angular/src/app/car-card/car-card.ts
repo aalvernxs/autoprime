@@ -9,6 +9,7 @@ import { MatButtonModule } from '@angular/material/button';
 
   @Component({
     selector: 'app-car-card',
+    standalone: true,
     imports: [CommonModule, MatCardModule, MatButtonModule],
     templateUrl: './car-card.html',
     styleUrl: './car-card.css',
