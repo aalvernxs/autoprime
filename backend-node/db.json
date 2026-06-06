@@ -1,0 +1,106 @@
+{
+  "cars": [
+    {
+      "id": "1",
+      "marca": "Honda",
+      "modelo": "Civic EXL 2.0",
+      "ano": 2023,
+      "preco": 145000,
+      "km": 15000,
+      "combustivel": "Flex",
+      "fotos": [
+        "https://images.unsplash.com/photo-1533473359331-0135ef1b58bf?w=600",
+        "https://images.unsplash.com/photo-1606664515524-ed2f786a0bd6?w=600",
+        "https://images.unsplash.com/photo-1494976388531-d1058494cdd8?w=600"
+      ],
+      "descricao": "O Honda Civic EXL 2.0 é sinônimo de confiabilidade e sofisticação."
+    },
+    {
+      "id": "2",
+      "marca": "Toyota",
+      "modelo": "Corolla XEi",
+      "ano": 2022,
+      "preco": 138000,
+      "km": 32000,
+      "combustivel": "Flex",
+      "fotos": [
+        "https://images.unsplash.com/photo-1559416523-140ddc3d238c?w=600",
+        "https://images.unsplash.com/photo-1621007947382-bb3c3994e3fb?w=600",
+        "https://images.unsplash.com/photo-1502877338535-766e1452684a?w=600"
+      ],
+      "descricao": "O Toyota Corolla XEi é um dos sedãs mais icônicos do mundo."
+    },
+    {
+      "id": "3",
+      "marca": "BMW",
+      "modelo": "X5 xDrive",
+      "ano": 2023,
+      "preco": 420000,
+      "km": 8000,
+      "combustivel": "Gasolina",
+      "fotos": [
+        "https://images.unsplash.com/photo-1556189250-72ba954cfc2b?w=600",
+        "https://images.unsplash.com/photo-1555215695-3004980ad54e?w=600",
+        "https://images.unsplash.com/photo-1519641471654-76ce0107ad1b?w=600"
+      ],
+      "descricao": "O BMW X5 xDrive representa o ápice do luxo e da performance em SUVs."
+    },
+    {
+      "id": "4",
+      "marca": "Ford",
+      "modelo": "Mustang GT",
+      "ano": 2021,
+      "preco": 320000,
+      "km": 21000,
+      "combustivel": "Gasolina",
+      "fotos": [
+        "https://images.unsplash.com/photo-1494976388531-d1058494cdd8?w=600",
+        "https://images.unsplash.com/photo-1584345604476-8ec5e3f9528b?w=600",
+        "https://images.unsplash.com/photo-1533473359331-0135ef1b58bf?w=600"
+      ],
+      "descricao": "O Ford Mustang GT é um ícone americano que dispensa apresentações."
+    },
+    {
+      "id": "5",
+      "marca": "Audi",
+      "modelo": "A4 Prestige",
+      "ano": 2023,
+      "preco": 290000,
+      "km": 5000,
+      "combustivel": "Gasolina",
+      "fotos": [
+        "https://images.unsplash.com/photo-1502877338535-766e1452684a?w=600",
+        "https://images.unsplash.com/photo-1606220588913-b3aacb4d2f46?w=600",
+        "https://images.unsplash.com/photo-1559416523-140ddc3d238c?w=600"
+      ],
+      "descricao": "O Audi A4 Prestige combina design elegante com tecnologia de ponta."
+    },
+    {
+      "id": "6",
+      "marca": "Jeep",
+      "modelo": "Compass Limited",
+      "ano": 2022,
+      "preco": 175000,
+      "km": 18000,
+      "combustivel": "Flex",
+      "fotos": [
+        "https://images.unsplash.com/photo-1519641471654-76ce0107ad1b?w=600",
+        "https://images.unsplash.com/photo-1533473359331-0135ef1b58bf?w=600",
+        "https://images.unsplash.com/photo-1556189250-72ba954cfc2b?w=600"
+      ],
+      "descricao": "O Jeep Compass Limited é o SUV perfeito para quem não abre mão de versatilidade."
+    },
+    {
+      "marca": "Mercedes",
+      "modelo": "Amg One",
+      "ano": 2026,
+      "preco": 12000000,
+      "km": 0,
+      "combustivel": "",
+      "fotos": [],
+      "descricao": "",
+      "id": "B_7eUJgC8AE"
+    }
+  ],
+  "$schema": "./node_modules/json-server/schema.json"
+}
