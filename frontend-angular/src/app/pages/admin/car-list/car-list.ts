@@ -49,8 +49,8 @@ export class CarEditComponent implements OnInit {
 
   ngOnInit(): void {
     const id = Number(this.route.snapshot.paramMap.get('id'));
-    this.carService.fetchById(id).subscribe({
-      next: car => this.car = { ...car },
+    this.carService.getById(id).subscribe({
+      next: (data) => this.car = { ...data },
       error: () => this.router.navigate(['/admin'])
     });
   }
@@ -66,9 +66,12 @@ export class CarEditComponent implements OnInit {
     this.car.fotos = this.car.fotos.filter((_, i) => i !== index);
   }
 
-  salvar() {
+salvar() {
     if (this.car.marca && this.car.modelo && this.car.ano && this.car.preco) {
-      this.carService.updateRemote(this.car).subscribe(() => this.router.navigate(['/admin']));
+      this.carService.update(this.car).subscribe({
+        next: () => this.router.navigate(['/admin']),
+        error: (err) => console.error('Erro ao atualizar:', err)
+      });
     } else {
       alert('Preencha todos os campos obrigatórios!');
     }

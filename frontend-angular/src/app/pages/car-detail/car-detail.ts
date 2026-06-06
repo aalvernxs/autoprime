@@ -2,9 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ActivatedRoute, Router } from '@angular/router';
 import { MatButtonModule } from '@angular/material/button';
+import { MatIconModule } from '@angular/material/icon';
 import { CarService } from '../../services/car';
 import { Car } from '../../models/car.models';
-import { MatIconModule } from '@angular/material/icon';
 
 @Component({
   selector: 'app-car-detail',
@@ -15,7 +15,7 @@ import { MatIconModule } from '@angular/material/icon';
 })
 export class CarDetailComponent implements OnInit {
   car: Car | undefined;
-  fotoAtual=0;
+  fotoAtual = 0;
 
   constructor(
     private route: ActivatedRoute,
@@ -25,10 +25,13 @@ export class CarDetailComponent implements OnInit {
 
   ngOnInit(): void {
     const id = Number(this.route.snapshot.paramMap.get('id'));
-    this.carService.fetchById(id).subscribe(car => this.car = car);
+    this.carService.getById(id).subscribe({
+      next: (data) => this.car = data,
+      error: () => this.router.navigate(['/'])
+    });
   }
 
-   proximaFoto(): void {
+  proximaFoto(): void {
     if (this.car) {
       this.fotoAtual = (this.fotoAtual + 1) % this.car.fotos.length;
     }
@@ -39,7 +42,6 @@ export class CarDetailComponent implements OnInit {
       this.fotoAtual = (this.fotoAtual - 1 + this.car.fotos.length) % this.car.fotos.length;
     }
   }
-
 
   voltar() {
     this.router.navigate(['/']);

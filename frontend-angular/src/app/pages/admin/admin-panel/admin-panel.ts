@@ -14,7 +14,7 @@ import { Car } from '../../../models/car.models';
   templateUrl: './admin-panel.html',
   styleUrl: './admin-panel.css'
 })
-export class AdminPanelComponent {
+export class AdminPanelComponent implements OnInit {
   cars: Car[] = [];
   totalCarros = 0;
   colunas = ['marca', 'modelo', 'ano', 'preco', 'combustivel', 'acoes'];
@@ -25,13 +25,12 @@ export class AdminPanelComponent {
   ) {}
 
   ngOnInit(): void {
-    this.load();
-  }
-
-  private load() {
-    this.carService.fetchAll().subscribe(cars => {
-      this.cars = cars;
-      this.totalCarros = cars.length;
+    this.carService.getAll().subscribe({
+      next: (data) => {
+        this.cars = data;
+        this.totalCarros = data.length;
+      },
+      error: (err) => console.error('Erro ao buscar carros:', err)
     });
   }
 
@@ -44,8 +43,8 @@ export class AdminPanelComponent {
   }
 
   irParaDashboard() {
-  this.router.navigate(['/admin/dashboard']);
-}
+    this.router.navigate(['/admin/dashboard']);
+  }
 
   editar(id: number) {
     this.router.navigate(['/admin/editar', id]);
@@ -53,7 +52,13 @@ export class AdminPanelComponent {
 
   excluir(id: number) {
     if (confirm('Tem certeza que deseja excluir este veículo?')) {
-      this.carService.deleteRemote(id).subscribe(() => this.load());
+      this.carService.delete(id).subscribe({
+        next: () => {
+          this.cars = this.cars.filter(car => car.id !== id);
+          this.totalCarros = this.cars.length;
+        },
+        error: (err) => console.error('Erro ao excluir:', err)
+      });
     }
   }
 }

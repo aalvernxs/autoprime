@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { MatInputModule } from '@angular/material/input';
@@ -6,12 +6,12 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatButtonModule } from '@angular/material/button';
 import { MatSelectModule } from '@angular/material/select';
 import { MatIconModule } from '@angular/material/icon';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { CarService } from '../../../services/car';
 import { Car } from '../../../models/car.models';
 
 @Component({
-  selector: 'app-car-form',
+  selector: 'app-car-edit',
   standalone: true,
   imports: [
     CommonModule,
@@ -22,11 +22,12 @@ import { Car } from '../../../models/car.models';
     MatSelectModule,
     MatIconModule
   ],
-  templateUrl: './car-form.html',
-  styleUrl: './car-form.css'
+  templateUrl: './car-edit.html',
+  styleUrl: './car-edit.css'
 })
-export class CarFormComponent {
-  car: Partial<Car> = {
+export class CarEditComponent implements OnInit {
+  car: Car = {
+    id: 0,
     marca: '',
     modelo: '',
     ano: new Date().getFullYear(),
@@ -41,26 +42,35 @@ export class CarFormComponent {
   fotoUrl = '';
 
   constructor(
+    private route: ActivatedRoute,
     private carService: CarService,
     private router: Router
   ) {}
 
+  ngOnInit(): void {
+    const id = Number(this.route.snapshot.paramMap.get('id'));
+    this.carService.getById(id).subscribe({
+      next: (data) => this.car = { ...data },
+      error: () => this.router.navigate(['/admin'])
+    });
+  }
+
   adicionarFoto() {
     if (this.fotoUrl.trim()) {
-      this.car.fotos = [...(this.car.fotos || []), this.fotoUrl.trim()];
+      this.car.fotos = [...this.car.fotos, this.fotoUrl.trim()];
       this.fotoUrl = '';
     }
   }
 
   removerFoto(index: number) {
-    this.car.fotos = this.car.fotos?.filter((_, i) => i !== index);
+    this.car.fotos = this.car.fotos.filter((_, i) => i !== index);
   }
 
   salvar() {
     if (this.car.marca && this.car.modelo && this.car.ano && this.car.preco) {
-      this.carService.add(this.car).subscribe({
+      this.carService.update(this.car).subscribe({
         next: () => this.router.navigate(['/admin']),
-        error: (err) => console.error('Erro ao cadastrar:', err)
+        error: (err) => console.error('Erro ao atualizar:', err)
       });
     } else {
       alert('Preencha todos os campos obrigatórios!');

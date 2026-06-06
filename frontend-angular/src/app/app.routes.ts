@@ -25,10 +25,10 @@ export const routes: Routes = [
     loadComponent: () => import('./pages/admin/car-form/car-form').then(m => m.CarFormComponent)
   },
   {
-    path: 'admin/editar/:id',
-    canActivate: [AuthGuard],
-    loadComponent: () => import('./pages/admin/car-list/car-list').then(m => m.CarEditComponent)
-  },
+  path: 'admin/editar/:id',
+  canActivate: [AuthGuard],
+  loadComponent: () => import('./pages/admin/car-edit/car-edit').then(m => m.CarEditComponent)
+},
   {
     path: 'admin/dashboard',
     canActivate: [AuthGuard],

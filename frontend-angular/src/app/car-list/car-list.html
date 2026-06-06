@@ -1,7 +1,7 @@
 <section class="car-list">
   <h2 class="car-list__titulo">Veículos disponíveis</h2>
   <div class="car-list__grid">
-    @for (car of cars; track car.id) {
+    @for (car of cars$ | async; track car.id) {
       <article class="card">
         <div class="card__img-wrapper">
           <img [src]="car.fotos[0] || placeholderImage" [alt]="car.modelo" class="card__img">
