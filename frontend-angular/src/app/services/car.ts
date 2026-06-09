@@ -15,9 +15,9 @@ export class CarService {
     return this.http.get<Car[]>(this.apiUrl);
   }
 
-  getById(id: number): Observable<Car> {
-    return this.http.get<Car>(`${this.apiUrl}/${id}`);
-  }
+ getById(id: number | string): Observable<Car> {
+  return this.http.get<Car>(`${this.apiUrl}/${id}`);
+}
 
   add(car: Partial<Car>): Observable<Car> {
     return this.http.post<Car>(this.apiUrl, car);

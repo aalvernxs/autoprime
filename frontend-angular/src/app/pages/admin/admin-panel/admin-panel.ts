@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, computed, signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Router } from '@angular/router';
 import { MatButtonModule } from '@angular/material/button';
@@ -15,8 +15,8 @@ import { Car } from '../../../models/car.models';
   styleUrl: './admin-panel.css'
 })
 export class AdminPanelComponent implements OnInit {
-  cars: Car[] = [];
-  totalCarros = 0;
+  cars = signal<Car[]>([]);
+  totalCarros = computed(() => this.cars().length);
   colunas = ['marca', 'modelo', 'ano', 'preco', 'combustivel', 'acoes'];
 
   constructor(
@@ -27,8 +27,7 @@ export class AdminPanelComponent implements OnInit {
   ngOnInit(): void {
     this.carService.getAll().subscribe({
       next: (data) => {
-        this.cars = data;
-        this.totalCarros = data.length;
+        this.cars.set(data);
       },
       error: (err) => console.error('Erro ao buscar carros:', err)
     });
@@ -54,8 +53,7 @@ export class AdminPanelComponent implements OnInit {
     if (confirm('Tem certeza que deseja excluir este veículo?')) {
       this.carService.delete(id).subscribe({
         next: () => {
-          this.cars = this.cars.filter(car => car.id !== id);
-          this.totalCarros = this.cars.length;
+          this.cars.update((current) => current.filter(car => car.id !== id));
         },
         error: (err) => console.error('Erro ao excluir:', err)
       });

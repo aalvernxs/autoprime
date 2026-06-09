@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, computed, signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Router } from '@angular/router';
 import { MatCardModule } from '@angular/material/card';
@@ -24,15 +24,28 @@ import { Car } from '../../models/car.models';
   styleUrl: './dashboard.css'
 })
 export class DashboardComponent implements OnInit {
-  cars: Car[] = [];
-  totalCarros = 0;
-  mediaPreco = 0;
-  carroMaisCaro: Car | undefined;
-  carroMaisBarato: Car | undefined;
+  cars = signal<Car[]>([]);
+  totalCarros = computed(() => this.cars().length);
+  mediaPreco = computed(() => {
+    const cars = this.cars();
+    if (cars.length === 0) {
+      return 0;
+    }
 
-  porMarca: { marca: string; quantidade: number }[] = [];
-  porAno: { ano: number; quantidade: number }[] = [];
-  porCombustivel: { combustivel: string; quantidade: number }[] = [];
+    return cars.reduce((acc, c) => acc + c.preco, 0) / cars.length;
+  });
+  carroMaisCaro = computed(() => {
+    const cars = this.cars();
+    return cars.length > 0 ? cars.reduce((a, b) => a.preco > b.preco ? a : b) : undefined;
+  });
+  carroMaisBarato = computed(() => {
+    const cars = this.cars();
+    return cars.length > 0 ? cars.reduce((a, b) => a.preco < b.preco ? a : b) : undefined;
+  });
+
+  porMarca = computed(() => this.agrupar('marca'));
+  porAno = computed(() => this.agrupar('ano').sort((a: any, b: any) => b.ano - a.ano));
+  porCombustivel = computed(() => this.agrupar('combustivel'));
 
   colunasMarca = ['marca', 'quantidade'];
   colunasAno = ['ano', 'quantidade'];
@@ -46,16 +59,7 @@ export class DashboardComponent implements OnInit {
   ngOnInit(): void {
     this.carService.getAll().subscribe({
       next: (cars) => {
-        this.cars = cars;
-        this.totalCarros = cars.length;
-        if (this.totalCarros > 0) {
-          this.mediaPreco = cars.reduce((acc, c) => acc + c.preco, 0) / this.totalCarros;
-          this.carroMaisCaro = cars.reduce((a, b) => a.preco > b.preco ? a : b);
-          this.carroMaisBarato = cars.reduce((a, b) => a.preco < b.preco ? a : b);
-        }
-        this.porMarca = this.agrupar('marca');
-        this.porAno = this.agrupar('ano').sort((a: any, b: any) => b.ano - a.ano);
-        this.porCombustivel = this.agrupar('combustivel');
+        this.cars.set(cars);
       },
       error: (err) => console.error('Erro ao buscar carros:', err)
     });
@@ -63,7 +67,7 @@ export class DashboardComponent implements OnInit {
 
   agrupar(campo: keyof Car): any[] {
     const mapa: { [key: string]: number } = {};
-    this.cars.forEach(car => {
+    this.cars().forEach(car => {
       const valor = String(car[campo]);
       mapa[valor] = (mapa[valor] || 0) + 1;
     });

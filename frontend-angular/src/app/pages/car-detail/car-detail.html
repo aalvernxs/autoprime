@@ -1,48 +1,48 @@
-<div class="detail" *ngIf="car; else notFound">
+<div class="detail" *ngIf="car(); else notFound">
 
   <div class="detail__header">
     <button class="detail__voltar" (click)="voltar()">← Voltar</button>
-    <h1 class="detail__titulo">{{ car.marca }} {{ car.modelo }}</h1>
+    <h1 class="detail__titulo">{{ car()!.marca }} {{ car()!.modelo }}</h1>
   </div>
 
   <div class="detail__container">
     <div class="detail__img-wrapper">
-      <img [src]="car.fotos[fotoAtual]" [alt]="car.modelo" class="detail__img">
-      <span class="detail__badge">{{ car.ano }}</span>
+      <img [src]="car()!.fotos[fotoAtual()]" [alt]="car()!.modelo" class="detail__img">
+      <span class="detail__badge">{{ car()!.ano }}</span>
 
       <button class="detail__seta detail__seta--esq" (click)="fotoAnterior()">&#8249;</button>
       <button class="detail__seta detail__seta--dir" (click)="proximaFoto()">&#8250;</button>
 
       <div class="detail__indicadores">
-        @for (foto of car.fotos; track $index) {
-          <span class="detail__indicador" [class.ativo]="$index === fotoAtual"></span>
+        @for (foto of car()!.fotos; track $index) {
+          <span class="detail__indicador" [class.ativo]="$index === fotoAtual()"></span>
         }
       </div>
     </div>
 
     <div class="detail__info">
-      <div class="detail__preco">{{ car.preco | currency:'BRL':'symbol':'1.0-0' }}</div>
+      <div class="detail__preco">{{ car()!.preco | currency:'BRL':'symbol':'1.0-0' }}</div>
 
       <div class="detail__specs">
         <div class="detail__spec">
           <span class="detail__spec-label">Marca</span>
-          <span class="detail__spec-value">{{ car.marca }}</span>
+          <span class="detail__spec-value">{{ car()!.marca }}</span>
         </div>
         <div class="detail__spec">
           <span class="detail__spec-label">Modelo</span>
-          <span class="detail__spec-value">{{ car.modelo }}</span>
+          <span class="detail__spec-value">{{ car()!.modelo }}</span>
         </div>
         <div class="detail__spec">
           <span class="detail__spec-label">Ano</span>
-          <span class="detail__spec-value">{{ car.ano }}</span>
+          <span class="detail__spec-value">{{ car()!.ano }}</span>
         </div>
         <div class="detail__spec">
           <span class="detail__spec-label">Quilometragem</span>
-          <span class="detail__spec-value">{{ car.km | number:'1.0-0' }} km</span>
+          <span class="detail__spec-value">{{ car()!.km | number:'1.0-0' }} km</span>
         </div>
         <div class="detail__spec">
           <span class="detail__spec-label">Combustível</span>
-          <span class="detail__spec-value">{{ car.combustivel }}</span>
+          <span class="detail__spec-value">{{ car()!.combustivel }}</span>
         </div>
       </div>
 
@@ -52,13 +52,17 @@
 
   <div class="detail__descricao">
     <h2 class="detail__descricao-titulo">Sobre o veículo</h2>
-    <p class="detail__descricao-texto">{{ car.descricao }}</p>
+    <p class="detail__descricao-texto">{{ car()!.descricao }}</p>
   </div>
 
 </div>
 
+<div *ngIf="carregando()" class="detail__loading">
+  <p>Carregando...</p>
+</div>
+
 <ng-template #notFound>
-  <div class="detail__not-found">
+  <div class="detail__not-found" *ngIf="!carregando() && !car()">
     <h2>Veículo não encontrado!</h2>
     <button class="detail__btn" (click)="voltar()">← Voltar</button>
   </div>

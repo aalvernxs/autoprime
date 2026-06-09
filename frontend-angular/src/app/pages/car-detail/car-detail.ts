@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ActivatedRoute, Router } from '@angular/router';
 import { MatButtonModule } from '@angular/material/button';
@@ -14,8 +14,9 @@ import { Car } from '../../models/car.models';
   styleUrl: './car-detail.css'
 })
 export class CarDetailComponent implements OnInit {
-  car: Car | undefined;
-  fotoAtual = 0;
+  car = signal<Car | undefined>(undefined);
+  fotoAtual = signal(0);
+  carregando = signal(true);
 
   constructor(
     private route: ActivatedRoute,
@@ -24,22 +25,30 @@ export class CarDetailComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    const id = Number(this.route.snapshot.paramMap.get('id'));
-    this.carService.getById(id).subscribe({
-      next: (data) => this.car = data,
-      error: () => this.router.navigate(['/'])
+    const id = this.route.snapshot.paramMap.get('id');
+    this.carService.getById(id!).subscribe({
+      next: (data) => {
+        this.car.set(data);
+        this.carregando.set(false);
+      },
+      error: () => {
+        this.carregando.set(false);
+        this.router.navigate(['/']);
+      }
     });
-  }
+}
 
-  proximaFoto(): void {
-    if (this.car) {
-      this.fotoAtual = (this.fotoAtual + 1) % this.car.fotos.length;
+  proximaFoto(): void { 
+    const car = this.car();
+    if (car) {
+      this.fotoAtual.update((current) => (current + 1) % car.fotos.length);
     }
   }
 
   fotoAnterior(): void {
-    if (this.car) {
-      this.fotoAtual = (this.fotoAtual - 1 + this.car.fotos.length) % this.car.fotos.length;
+    const car = this.car();
+    if (car) {
+      this.fotoAtual.update((current) => (current - 1 + car.fotos.length) % car.fotos.length);
     }
   }
 
@@ -47,3 +56,6 @@ export class CarDetailComponent implements OnInit {
     this.router.navigate(['/']);
   }
 }
+
+
+  

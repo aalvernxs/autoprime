@@ -14,7 +14,7 @@
     <span class="admin__card-icon">🚗</span>
     <div>
       <p class="admin__card-label">Total de veículos</p>
-      <p class="admin__card-valor">{{ totalCarros }}</p>
+      <p class="admin__card-valor">{{ totalCarros() }}</p>
     </div>
   </div>
 
@@ -34,7 +34,7 @@
       </div>
 
      
-      <table mat-table [dataSource]="cars" class="admin__tabela">
+      <table mat-table [dataSource]="cars()" class="admin__tabela">
 
         <ng-container matColumnDef="marca">
           <th mat-header-cell *matHeaderCellDef>Marca</th>
