@@ -1,2 +1,2 @@
-<app-search />
-<app-car-list />
+<app-search (filtroMudou)="onFiltroMudou($event)" />
+<app-car-list [filtros]="filtros()" />

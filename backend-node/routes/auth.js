@@ -7,7 +7,7 @@ const SECRET = process.env.JWT_SECRET || 'change_this_secret';
 router.post('/login', (req, res) => {
   const { email, senha } = req.body;
   // placeholder: usuário fixo
-  if ((email === 'admin' || email === 'admin@local') && senha === 'admin') {
+  if ((email === 'admin' || email === 'admin@local') && senha === 'admin123') {
     const token = jwt.sign({ sub: 'admin', role: 'admin' }, SECRET, { expiresIn: '8h' });
     return res.json({ token });
   }

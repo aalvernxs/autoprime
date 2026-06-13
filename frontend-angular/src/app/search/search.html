@@ -8,6 +8,7 @@
       type="text"
       placeholder="🔍  Buscar veículo..."
       [(ngModel)]="termoBusca"
+      (input)="onTermoBuscaChange()"
     />
 
     <div class="search-filtros">
@@ -27,6 +28,9 @@
             }
           </div>
         }
+        @if (marcaSelecionada) {
+          <button class="dropdown__clear" (click)="limpar('marca')" title="Limpar">✕</button>
+        }
       </div>
 
       <!-- Ano -->
@@ -44,26 +48,34 @@
             }
           </div>
         }
+        @if (anoSelecionado) {
+          <button class="dropdown__clear" (click)="limpar('ano')" title="Limpar">✕</button>
+        }
       </div>
 
       <!-- Preço -->
       <div class="dropdown">
         <button class="dropdown__btn" (click)="toggleDropdown('preco')">
-          {{ precoSelecionado || 'Preço' }}
+          {{ (precos.find(p => p.value === precoSelecionado)?.label || 'Preço') }}
           <span class="dropdown__seta">▾</span>
         </button>
         @if (dropdownAberto === 'preco') {
           <div class="dropdown__menu">
-            @for (preco of precos; track preco) {
-              <div class="dropdown__item" (click)="selecionar('preco', preco)">
-                {{ preco }}
+            @for (preco of precos; track preco.value) {
+              <div class="dropdown__item" (click)="selecionar('preco', preco.value)">
+                {{ preco.label }}
               </div>
             }
           </div>
         }
+        @if (precoSelecionado) {
+          <button class="dropdown__clear" (click)="limpar('preco')" title="Limpar">✕</button>
+        }
       </div>
 
-      <button class="search-button">Buscar</button>
+      <button class="search-button" (click)="limparTodos()" *ngIf="marcaSelecionada || anoSelecionado || precoSelecionado || termoBusca">
+        Limpar filtros
+      </button>
 
     </div>
   </div>

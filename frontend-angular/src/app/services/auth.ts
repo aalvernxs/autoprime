@@ -8,11 +8,16 @@ export class AuthService {
 
   private logado = false;
 
-    constructor(private router: Router) {}
+    constructor(private router: Router) {
+      // Restaurar estado do localStorage ao inicializar
+      const salvo = localStorage.getItem('autenticado');
+      this.logado = salvo === 'true';
+    }
 
     login(email: string, senha : string ): boolean {
-      if (email === 'admin' && senha === 'admin'){
+      if (email === 'admin@local' && senha === 'admin123'){
         this.logado = true;
+        localStorage.setItem('autenticado', 'true');
         return true;
 
       }
@@ -21,6 +26,7 @@ export class AuthService {
 
     logout(): void {
       this.logado = false;
+      localStorage.removeItem('autenticado');
       this.router.navigate(['/login'])
 
     }

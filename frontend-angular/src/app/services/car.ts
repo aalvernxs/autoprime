@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { Car } from '../models/car.models';
 
@@ -7,7 +7,7 @@ import { Car } from '../models/car.models';
   providedIn: 'root'
 })
 export class CarService {
-  private apiUrl = 'http://localhost:3001/cars';
+  private apiUrl = 'http://localhost:3000/cars';
 
   constructor(private http: HttpClient) {}
 
@@ -15,9 +15,28 @@ export class CarService {
     return this.http.get<Car[]>(this.apiUrl);
   }
 
- getById(id: number | string): Observable<Car> {
-  return this.http.get<Car>(`${this.apiUrl}/${id}`);
-}
+  getFiltered(marca?: string, ano?: string, preco?: string, termo?: string): Observable<Car[]> {
+    let params = new HttpParams();
+    
+    if (marca && marca !== '') {
+      params = params.set('marca', marca);
+    }
+    if (ano && ano !== '') {
+      params = params.set('ano', ano);
+    }
+    if (preco && preco !== '') {
+      params = params.set('preco', preco);
+    }
+    if (termo && termo !== '') {
+      params = params.set('termo', termo);
+    }
+    
+    return this.http.get<Car[]>(this.apiUrl, { params });
+  }
+
+  getById(id: number | string): Observable<Car> {
+    return this.http.get<Car>(`${this.apiUrl}/${id}`);
+  }
 
   add(car: Partial<Car>): Observable<Car> {
     return this.http.post<Car>(this.apiUrl, car);

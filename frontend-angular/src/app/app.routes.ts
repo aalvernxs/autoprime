@@ -10,10 +10,10 @@ export const routes: Routes = [
     path: 'carro/:id',
     loadComponent: () => import('./pages/car-detail/car-detail').then(m => m.CarDetailComponent)
   },
-  {
-    path: 'login',
-    loadComponent: () => import('./pages/login/login').then(m => m.Login)
-  },
+ {
+  path: 'login',
+  loadComponent: () => import('./pages/login/login').then(m => m.LoginComponent)
+},
   {
     path: 'admin',
     canActivate: [AuthGuard],

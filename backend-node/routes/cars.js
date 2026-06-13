@@ -4,7 +4,44 @@ const dbModule = require('../db');
 
 router.get('/', (req, res) => {
   const db = dbModule.getDbConnection();
-  db.all('SELECT * FROM cars', [], (err, rows) => {
+  const { marca, ano, preco, termo } = req.query;
+  
+  let query = 'SELECT * FROM cars WHERE 1=1';
+  const params = [];
+  
+  // Filtro por marca
+  if (marca && marca !== '') {
+    query += ' AND marca = ?';
+    params.push(marca);
+  }
+  
+  // Filtro por ano
+  if (ano && ano !== '') {
+    query += ' AND ano = ?';
+    params.push(parseInt(ano));
+  }
+  
+  // Filtro por preço
+  if (preco && preco !== '') {
+    if (preco === 'ate-50000') {
+      query += ' AND preco <= 50000';
+    } else if (preco === '50000-100000') {
+      query += ' AND preco > 50000 AND preco <= 100000';
+    } else if (preco === '100000-200000') {
+      query += ' AND preco > 100000 AND preco <= 200000';
+    } else if (preco === 'acima-200000') {
+      query += ' AND preco > 200000';
+    }
+  }
+  
+  // Filtro por termo de busca (marca, modelo, descrição)
+  if (termo && termo !== '') {
+    query += ' AND (marca LIKE ? OR modelo LIKE ? OR descricao LIKE ?)';
+    const searchTerm = `%${termo}%`;
+    params.push(searchTerm, searchTerm, searchTerm);
+  }
+  
+  db.all(query, params, (err, rows) => {
     db.close();
     if (err) return res.status(500).json({ error: err.message });
     // parse fotos JSON

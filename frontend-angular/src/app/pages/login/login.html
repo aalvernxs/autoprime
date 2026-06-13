@@ -6,23 +6,43 @@
       <p class="login__subtitulo">Acesse sua conta</p>
     </div>
 
-    <div class="login__form">
+    <form class="login__form" [formGroup]="form" (ngSubmit)="login()">
       <mat-form-field appearance="outline" class="login__field">
         <mat-label>Email</mat-label>
-        <input matInput type="email" [(ngModel)]="email" placeholder="seu@email.com">
+        <input matInput type="email" formControlName="email" placeholder="seu@email.com">
         <mat-icon matSuffix>email</mat-icon>
+        @if (email?.invalid && email?.touched) {
+          <mat-error>
+            @if (email?.hasError('required')) {
+              Email é obrigatório
+            }
+            @if (email?.hasError('email')) {
+              Digite um email válido
+            }
+          </mat-error>
+        }
       </mat-form-field>
 
       <mat-form-field appearance="outline" class="login__field">
         <mat-label>Senha</mat-label>
-        <input matInput [type]="senhaVisivel ? 'text' : 'password'" [(ngModel)]="senha">
-        <mat-icon matSuffix (click)="toggleSenhaVisivel()" style="cursor:pointer">
+        <input matInput [type]="senhaVisivel ? 'text' : 'password'" formControlName="senha">
+        <mat-icon matSuffix (click)="toggleSenha()" style="cursor:pointer">
           {{ senhaVisivel ? 'visibility_off' : 'visibility' }}
         </mat-icon>
+        @if (senha?.invalid && senha?.touched) {
+          <mat-error>
+            @if (senha?.hasError('required')) {
+              Senha é obrigatória
+            }
+            @if (senha?.hasError('minlength')) {
+              A senha deve ter no mínimo 6 caracteres
+            }
+          </mat-error>
+        }
       </mat-form-field>
 
-      <button class="login__btn" (click)="login()">Entrar</button>
-    </div>
+      <button class="login__btn" type="submit" [disabled]="form.invalid">Entrar</button>
+    </form>
 
   </div>
 </div>
