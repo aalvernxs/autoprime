@@ -1,74 +1,128 @@
-# AutoPrime 🚗
+# 🚗 AutoPrime — Sistema de Venda de Veículos
 
-O **AutoPrime** é um sistema web moderno para gerenciamento e visualização de veículos à venda. O projeto permite que usuários visualizem o catálogo de carros disponíveis, enquanto administradores possuem um painel para gerir o inventário de forma eficiente.
+Sistema web completo para gerenciamento e visualização de veículos à venda, desenvolvido como projeto acadêmico da disciplina de Desenvolvimento Web com Angular.
 
-## 🚀 Tecnologias Utilizadas
+## 👥 Integrantes
 
-Este projeto está sendo organizado em duas camadas de API:
-
-* **Mock API:** JSON Server para desenvolvimento rápido e prototipação.
-* **API real:** Node.js com Express para expor os endpoints do sistema.
-* **Base de Dados:** SQL, preferencialmente PostgreSQL.
-* **Cliente:** Angular consumindo a API via `HttpClient`.
-* **Autenticação:** JWT (JSON Web Tokens).
-
-## 📋 Funcionalidades Planejadas
-
-### Para Usuários
-* Listagem de veículos (Header já implementado!).
-* Visualização de detalhes técnicos dos carros.
-* Filtros por marca, ano e preço.
-
-### Para Administradores (Protegido por Login)
-* Painel de Dashboard com métricas (Total de veículos, média de preços).
-* Cadastro, edição e remoção de veículos (CRUD).
-* Controle de acesso e proteção de rotas.
-* Consumo de API com integração SQL.
-
-## 🔌 Como funciona a integração
-
-O JSON Server não fala direto com SQL. Ele serve para simular endpoints enquanto o backend real ainda está em construção.
-
-Fluxo recomendado:
-
-1. O Angular consome a API por `HttpClient`.
-2. O backend Express recebe as requisições.
-3. O backend acessa o banco SQL.
-4. Para testes rápidos, o JSON Server pode substituir temporariamente o backend real.
-
-Se quiser seguir o caminho certo para produção, use Express + SQL. Se quiser apenas simular dados no front, use JSON Server.
-
-## 📂 Estrutura do Repositório
-
-O projeto está dividido em duas partes principais para facilitar o desenvolvimento independente:
-
-```text
-/
-├── frontend-angular/  # Interface do usuário e lógica de cliente
-└── backend-node/      # API, autenticação e conexão com a base de dados
-```
-
-## 🛠️ Como Executar o Projeto
-
-1. **Clonar o repositório:**
-   ```bash
-   git clone https://github.com/aalvernxs/autoprime.git
-   ```
-
-2. **Executar o Front-end:**
-   ```bash
-   cd frontend-angular
-   npm install
-   ng serve
-   ```
-   Acesse `http://localhost:4200/`.
-
-4. **Executar o backend real ou mock:**
-   Veja as instruções em [backend-node/README.md](backend-node/README.md).
-
-## 👥 Integrantes do Grupo
-* Arthur Rodrigues Alvernaz
-* Lucas Duarte Drummond de Souza
+- Arthur Rodrigues Alvernaz
+- Lucas Duarte Drummond de Souza
 
 ---
-*Este projeto está sendo desenvolvido como parte do curso de Ciência da Computação na Universidade FUMEC.*
+
+## 📋 Sobre o Projeto
+
+O AutoPrime permite que usuários naveguem pelo catálogo de veículos disponíveis e que administradores gerenciem o estoque por meio de um painel protegido, com operações completas de cadastro, edição e exclusão.
+
+---
+
+## 🛠 Tecnologias Utilizadas
+
+**Frontend:**
+- Angular 20 (Standalone Components, Signals)
+- TypeScript
+- Angular Material
+- Reactive Forms + Validators
+- HttpClient
+
+**Backend:**
+- Node.js + Express
+- SQLite (via sqlite3)
+- JWT (JSON Web Token)
+
+**Ferramentas:**
+- Git + GitHub (GitFlow + Conventional Commits)
+
+---
+
+## 📁 Estrutura do Projeto
+autoprime/
+
+├── frontend-angular/     # Aplicação Angular
+
+└── backend-node/         # API REST Node.js
+
+ ---
+
+## 🖥 Páginas da Aplicação
+
+| Página | Rota | Descrição |
+|---|---|---|
+| Home | `/` | Listagem de veículos com busca e filtros |
+| Detalhes | `/carro/:id` | Detalhes do veículo com carrossel de fotos |
+| Login | `/login` | Autenticação do administrador |
+| Painel Admin | `/admin` | Gerenciamento de veículos |
+| Cadastro | `/admin/cadastro` | Formulário de cadastro de veículo |
+| Edição | `/admin/editar/:id` | Formulário de edição de veículo |
+| Dashboard | `/admin/dashboard` | Relatórios e estatísticas |
+
+---
+
+## 🔌 Endpoints da API
+
+| Método | Rota | Descrição |
+|---|---|---|
+| GET | `/cars` | Lista todos os veículos |
+| GET | `/cars/:id` | Busca veículo por ID |
+| POST | `/cars` | Cadastra novo veículo |
+| PUT | `/cars/:id` | Atualiza veículo |
+| DELETE | `/cars/:id` | Remove veículo |
+| POST | `/auth/login` | Autentica e retorna JWT |
+
+---
+
+## 🚀 Como Rodar o Projeto
+
+### Pré-requisitos
+- Node.js instalado
+- Angular CLI instalado (`npm install -g @angular/cli`)
+
+### Backend
+
+```bash
+cd backend-node
+npm install
+node index.js
+```
+
+O backend estará disponível em `http://localhost:3000`
+
+### Frontend
+
+```bash
+cd frontend-angular
+npm install
+ng serve
+```
+
+O frontend estará disponível em `http://localhost:4200`
+
+---
+
+## 🔐 Credenciais de Acesso
+
+Para acessar o painel administrativo:
+
+- **Email:** `admin@autoprime.com`
+- **Senha:** `123456`
+
+---
+
+## ✅ Funcionalidades Implementadas
+
+- [x] Listagem de veículos consumindo API real
+- [x] Busca e filtros por marca, ano e preço
+- [x] Detalhes do veículo com carrossel de fotos
+- [x] Login com Reactive Forms e validação
+- [x] Proteção de rotas com AuthGuard
+- [x] CRUD completo de veículos
+- [x] Dashboard com relatórios usando Angular Signals
+- [x] Lazy Loading nas rotas
+- [x] Backend REST com Node.js + Express
+- [x] Banco de dados SQLite
+- [x] Commits semânticos + GitFlow
+
+---
+
+## 📂 Repositório
+
+[https://github.com/aalvernxs/autoprime](https://github.com/aalvernxs/autoprime)
