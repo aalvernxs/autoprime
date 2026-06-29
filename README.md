@@ -2,10 +2,6 @@
 
 Sistema web completo para gerenciamento e visualização de veículos à venda, desenvolvido como projeto acadêmico da disciplina de Desenvolvimento Web com Angular.
 
-## 👥 Integrantes
-
-- Arthur Rodrigues Alvernaz
-- Lucas Duarte Drummond de Souza
 
 ---
 
